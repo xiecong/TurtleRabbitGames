@@ -1,0 +1,148 @@
+/* Bootstrap Overrides */
+
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+	vertical-align: middle;
+}
+
+
+/* Helper Classes */
+
+.align-center  {
+	text-align: center;
+}
+
+.align-left  {
+	text-align: left;
+}
+
+.align-right  {
+	text-align: right;
+}
+
+.bump-20	{
+	margin-top: 20px;
+}
+
+.dimmed	{
+	color: #ddd;
+}
+
+.padding-10  {
+	padding: 10px;
+}
+
+.white-text  {
+	color: #fff;
+}
+
+/* Player Styles */
+
+.player {
+	cursor: pointer;
+}
+
+
+body { background-color:#339966; 
+	font-family:"comic sans ms";}
+
+#controlPanel {
+	border-radius:25px;	
+	width: 600px;
+	padding: 5px;
+	background-color:#F7EAC8;
+	text-align: center;	
+	margin-top: 20px;	
+	margin-left:auto;
+	margin-right:auto;
+}
+
+img.person {width:100px; }
+
+#gamePage {
+	margin-left:auto;
+	margin-right:auto;
+	border: 0px solid red;
+	border-spacing:10px;
+	text-align:center;	
+}
+
+table, td {
+	border-collapse: separate;
+    border: 0px solid black;
+}
+
+.outerCells {
+	position: relative;
+	width: 90px;
+	height:40px;
+}
+
+.imgBox  {
+	position: relative;
+	background-color: #23754F; /* #754f23 */
+	padding:0;
+	width: 150px; height: 150px;
+	border-radius:10px;
+	border: thick solid #23754F;
+}
+
+.choices {
+	position: absolute;
+	margin-left: auto; margin-right: auto; left: 0px; right: 0px;
+	margin-top: auto; margin-bottom: auto; top: 0px; bottom: 0px;
+	background-color:#ffffc4;
+	border-radius:10px;
+	border:2px solid #62431C;
+	padding:0px;
+	font-family:"comic sans ms";
+	font-size:16px;
+	color:black;
+	width:70px;
+	height:30px;	
+}
+
+.choices:enabled { 	
+	cursor:pointer;	
+	color: blue;	
+	background-color:yellow !important; 
+	-webkit-animation: growing .7s linear .5s 10;
+	animation: growing .7s linear .5s 10 ;
+}
+
+.choices:enabled:hover { 
+	background-color:yellow !important;
+	font-weight: bold;		
+}
+
+.cherry{
+	position:absolute;
+	bottom:10%;
+	left:10%;
+	height: 45px; 
+	padding: 0px;	
+	transform: rotate(-10deg);
+  	-webkit-transform: rotate(-10deg);
+  	-ms-transform: rotate(-10deg); 
+}
+				
+.carrot {
+	position: absolute;
+	height: 45px; 
+	top: 10%;
+	right:10%;
+	padding: 0px;
+	transform: rotate(-10deg);
+  	-webkit-transform: rotate(-10deg);
+  	-ms-transform: rotate(-10deg); 
+}
+	
+/* This is for animating choices */
+@-webkit-keyframes growing {
+	0%   {width:70px; height:30px;}
+    50%  {width:74px; height:35px;}	
+}
+@keyframes growing {
+    0%   {width:70px; height:30px;}
+    50%  {width:74px; height:35px;} 	
+}
+	

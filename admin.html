@@ -1,0 +1,82 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta charset="utf-8">
+
+	<!-- jQuery -->
+	<script src="lib/jquery.min.js"></script>
+	<script src="lib/other.js"></script>
+	<!-- Angular -->
+	<script src="lib/angular.min.js"></script>
+	<!-- Firebase -->
+	<script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
+	<script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.js"></script>
+	<script src='https://cdn.firebase.com/js/simple-login/1.6.1/firebase-simple-login.js'></script>
+	<!-- App -->
+	<script src="js/admin.js"></script>
+	<!-- Directives -->
+	<!--script src="js/sortable.js"></script>
+
+	<!-- Styles -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-app="adminApp">
+	<div ng-controller="adminCtrl">
+		<div class="col-lg-12 col-md-12">
+			<h2>Lobbies</h2> <button class="btn btn-success" ng-click="exportAll()">Export All Data</button>
+			<div class="well col-lg-12 col-md-12">
+				<!-- Show this if there are no lobbies available -->
+				<h4 ng-show="lobbies.$value === null" ng-cloak>No Available Lobbies</h4>
+				<!-- Repeat this element for every lobby available -->
+				<div class="col-lg-3 col-md-3" ng-repeat="(key, lobby) in lobbies">
+					<h4>{{'Lobby ' + key}} <button class="btn btn-danger" ng-click="purgeGame(key)">&times;</button> <button class="btn btn-success" ng-click="export(key)">export data</button></h4>
+					<!-- Show this message if no more players exist in this lobby -->
+					<span ng-if="!lobby.players">There are no more players in this lobby</span>
+					<ul class="list-group" ng-model="lobby.players">
+						<li class="list-group-item" ng-repeat="(id, player) in lobby.players">
+							<strong ng-class="{dimmed: player.disconnected}">&nbsp;{{player.name}}</strong>		
+							<span class="label label-success pull-right" ng-show="player.ready">Ready!</span>
+							<button class="btn btn-xs btn-danger pull-right" alt="Remove player" ng-if="player.disconnected" ng-click="purgePlayer(key, id)">
+								&times;
+							</button>	 				
+						</li>
+					</ul-->
+					<button ng-if="!lobby.startGame.gameStarted" class="btn btn-success" ng-disabled="!allReady[{{key}}]" ng-click="launchGame(key)">
+						{{launchButtonText}}
+					</button>					
+					<!-- Show this button if no more players exist in this lobby. -->
+					<button ng-if="!lobby.players" class="btn btn-danger" ng-click="purgeGame(key)">Remove Lobby</button>
+					<!-- Show this badge if there is a game in progress in this lobby -->
+					<h5 ng-if="lobby.startGame.gameStarted && lobby.players">
+						<span class="label label-success">game in progress</span>
+					</h5>
+					<!--button ng-if="lobby.startGame.gameStarted" class="btn btn-warning" ng-disabled="fightStarted[key]" ng-click="startFights(key)">
+						Start Fight
+					</button>
+					<button ng-if="fightStarted[key]" class="btn btn-danger" ng-click="stopFights(key)">
+						Stop Fight
+					</button-->
+					<div class="table-responsive" ng-show="lobby.startGame.gameStarted && lobby.players">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Player</th>
+									<th colspan="5">Score</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="player in lobby.players">
+									<td>{{player.player_number}} {{player.name}}</td>
+									<td>{{player.score}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

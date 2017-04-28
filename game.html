@@ -1,0 +1,85 @@
+<div>
+	<div class="col-lg-4">
+		<b>Round <span ng-bind="board.round"></span></b>
+		<button ng-disabled = "board.round >= 10 || player.status!='viewresult'" class="btn btn-success" ng-click="next()">Next Round</button>
+		<p>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Player</th>
+					<th>Turtle</th>
+					<th>Rabbit</th>
+				</tr>
+			</thead>
+			<tbody>			
+				<tr>
+					<td><b>Total Score</b></td>		
+					<td ng-repeat="p in players">			
+						<span ng-bind="p.score"></span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>
+
+	</div>	
+	<!-- PLAYERS PANEL -->
+	<div class="col-lg-8">
+
+		<table id="gamePage" border=0>
+			<tbody>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td colspan="2" style="position:relative;">
+						<div ng-show="player.character =='rabbit'">You are</div>
+						<img class="person" src="img/rabbit.png" alt="">
+						<div ng-show="player.status=='selected' && player.character == 'rabbit' || opponent.status=='selected' && opponent.character == 'rabbit'">Rabbit decided</div>
+					</td>
+				</tr>
+				<tr>
+					<td rowspan="3">
+						<div ng-show="player.character =='turtle'">You are</div>
+						<img class="person" src="img/turtle.png" alt="">
+						<div ng-show="player.status=='selected' && player.character == 'turtle' || opponent.status=='selected' && opponent.character == 'turtle'">Turtle decided</div>
+					</td>
+					<td>&nbsp;</td>
+					<td class="outerCells">
+						<button class="choices" ng-show="player.character == 'rabbit' || player.status == 'viewresult'" ng-disabled="player.status!='ready4select' && player.character == 'rabbit' || (opponent.status=='viewresult' || opponent.status=='ready4next') && opponent.character == 'rabbit'" ng-style="setButtonColor('rabbit',0)" ng-click="select(0)">West</button>
+					</td>
+					<td class="outerCells">
+						<button class="choices" ng-show="player.character == 'rabbit' || player.status == 'viewresult'" ng-disabled="player.status!='ready4select' && player.character == 'rabbit' || (opponent.status=='viewresult' || opponent.status=='ready4next') && opponent.character == 'rabbit'" ng-style="setButtonColor('rabbit',1)" ng-click="select(1)">East</button>
+					</td>
+				</tr>
+				<tr>
+					<td class="outerCells">
+						<button class="choices" ng-show="player.character == 'turtle'|| player.status == 'viewresult'" ng-disabled="player.status!='ready4select' && player.character == 'turtle' || (opponent.status=='viewresult' || opponent.status=='ready4next') && opponent.character == 'turtle'" ng-style="setButtonColor('turtle',0)" ng-click="select(0)">North</button>
+					</td>
+					<td id="northwest" class="imgBox" ng-style="getBorder(0,0)">
+						<img ng-src="https://dl.dropboxusercontent.com/u/4745232/carrots/cherry{{board.cherry.0}}.png" class="cherry">
+						<img ng-src="https://dl.dropboxusercontent.com/u/4745232/carrots/carrot{{board.carrot.0}}.png" class="carrot">
+					</td>
+					<td id="northeast" class="imgBox" ng-style="getBorder(0,1)">
+						<img ng-src="https://dl.dropboxusercontent.com/u/4745232/carrots/cherry{{board.cherry.1}}.png" class="cherry">
+						<img ng-src="https://dl.dropboxusercontent.com/u/4745232/carrots/carrot{{board.carrot.1}}.png" class="carrot">
+					</td>
+				</tr>
+				<tr>
+					<td class="outerCells">		
+						<button class="choices" ng-show="player.character == 'turtle'|| player.status == 'viewresult'" ng-disabled="player.status!='ready4select' && player.character == 'turtle' || (opponent.status=='viewresult' || opponent.status=='ready4next') && opponent.character == 'turtle'" ng-style="setButtonColor('turtle',1)" ng-click="select(1)">South</button>
+					</td>
+					<td id="southwest" class="imgBox" ng-style="getBorder(1,0)"> 
+						<img ng-src="https://dl.dropboxusercontent.com/u/4745232/carrots/cherry{{board.cherry.2}}.png" class="cherry">
+						<img ng-src="https://dl.dropboxusercontent.com/u/4745232/carrots/carrot{{board.carrot.2}}.png" class="carrot">
+					</td>
+					<td id="southeast" class="imgBox" ng-style="getBorder(1,1)">
+						<img ng-src="https://dl.dropboxusercontent.com/u/4745232/carrots/cherry{{board.cherry.3}}.png" class="cherry">
+						<img ng-src="https://dl.dropboxusercontent.com/u/4745232/carrots/carrot{{board.carrot.3}}.png" class="carrot">
+					</td>
+				</tr>		
+			</tbody>
+		</table>
+
+	</div>
+	
+</div>

@@ -1,0 +1,50 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta charset="utf-8">
+
+	<!-- jQuery -->
+	<script src="lib/jquery.min.js"></script>
+	<script src="lib/other.js"></script>
+	<!-- Angular -->
+	<script src="lib/angular.min.js"></script>
+	<script src="lib/angular-route.min.js"></script>
+	<!-- Firebase -->
+	<script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
+	<script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.js"></script>
+	<script src='https://cdn.firebase.com/js/simple-login/1.6.1/firebase-simple-login.js'></script>
+	<!-- App -->
+	<script src="js/game.js"></script>
+	<script src="js/player.js"></script>
+	<!-- Directives -->
+	<!--script src="js/sortable.js"></script>
+
+	<!-- Styles -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-app="gameApp">
+	<div ng-controller="LobbyCtrl">
+		<!-- Hide this while there are no players yet connected -->
+		<div class="col-lg-12 col-md-12 bump-20" ng-hide="!players">
+			<div class="col-lg-3 col-md-3 well" ng-hide="gameStarted">
+				<h4>Players</h4>
+				<ul class="list-group">
+					<!-- Repeat element for each player in the lobby -->
+					<li class="list-group-item" ng-repeat="player in players">
+						<strong ng-class="{dimmed: player.disconnected}">&nbsp;{{player.name}}</strong>		
+						<span class="label label-success pull-right" ng-hide="!player.ready || gameStarted">Ready!</span>
+						<span class="label label-warning pull-right" ng-hide="!player.disconnected">offline</span>									
+					</li>
+				</ul>
+				<!-- Ready button - text changes based on player's ready state -->
+				<button class="btn btn-success" ng-click="readyUp()" ng-disabled="!myUserRef" ng-hide="gameStarted" ng-cloak>{{readyText}}</button>
+			</div>
+			<div class="col-lg-12 col-md-12">
+				<!--span ng-show="showCountdown">Game starting in: {{counter}}</span-->
+				<div ng-view></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
